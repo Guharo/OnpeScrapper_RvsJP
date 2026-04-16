@@ -37,10 +37,7 @@ if (resultado?.data != null)
     //Console.WriteLine($"-----------------------------");
     //Console.WriteLine($"Diferencia: {diferencia:N0} votos.");
 
-    string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-    string templatePath = Path.Combine(baseDirectory, "template.html");
-
-    string template = File.ReadAllText(templatePath);
+    string template = File.ReadAllText("template.html");
 
     DateTime horaPeru = DateTime.UtcNow.AddHours(-5);
 
