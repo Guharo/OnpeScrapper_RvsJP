@@ -2,36 +2,75 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados ONPE</title>
     <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            padding-top: 50px;
-        }
+            body {
+                font-family: sans-serif;
+                text-align: center;
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+            }
 
-        .resultado {
-            font-size: 3em;
-            font-weight: bold;
-            color: #004a99;
-        }
+            /* Contenedor que limita el ancho en PCs/TVs pero ocupa el 100% en móviles */
+            .contenedor {
+                width: 100%;
+                max-width: 800px;
+            }
 
-        .detalles {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #333;
-        }
+            h1 {
+                font-size: 2.5em;
+                color: #444;
+            }
+
+            .resultado {
+                font-size: 5em;
+                font-weight: bold;
+                color: #004a99;
+                margin: 20px 0;
+            }
+
+            .detalles {
+                margin-top: 30px;
+                font-size: 1.8em;
+                color: #333;
+            }
+
+                .detalles p {
+                    margin: 10px 0;
+                }
+
+            .actualizado {
+                margin-top: 40px;
+                font-size: 1.2em;
+                color: #666;
+            }
+            .actualizado a {
+                color: #007bff;
+                text-decoration: none;
+            }
+            .actualizado a:hover {
+                text-decoration: underline;
+                color: #0056b3;
+            }
     </style>
 </head>
 <body>
-    <h1>Diferencia de votos</h1>
-    <div class="resultado">{{DIFERENCIA}}</div>
+    <div class="contenedor">
+        <h1>Diferencia de votos al {{PORCENTAJE}}%</h1>
+        <div class="resultado">{{DIFERENCIA}}</div>
 
-    <div class="detalles">
-        <p>Juntos por el Perú: {{VOTOS10}}</p>
-        <p>Renovación Popular: {{VOTOS35}}</p>
+        <div class="detalles">
+            <p>Juntos por el Perú: <b>{{VOTOS10}}</b></p>
+            <p>Renovación Popular: <b>{{VOTOS35}}</b></p>
+        </div>
+
+        <div class="actualizado">
+            <a href="https://resultadoelectoral.onpe.gob.pe/main/resumen" target="_blank" style="text-decoration: none; color: inherit;">
+                Última actualización ONPE: {{FECHA}}
+            </a>
+        </div>
     </div>
-
-    <p>Última actualización: {{FECHA}}</p>
 </body>
 </html>

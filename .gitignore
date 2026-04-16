@@ -396,3 +396,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# No subir scripts locales
+deploy.bat
+ninjaDeploy.vbs
+*.log
