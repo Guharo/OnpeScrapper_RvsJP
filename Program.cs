@@ -1,20 +1,22 @@
 ﻿using System.Text.Json;
+using System.Net.Http;
 using System.Net.Http.Headers;
 
 HttpClient client = new HttpClient();
+
 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "https://resultadoelectoral.onpe.gob.pe/presentacion-backend/resumen-general/participantes?idEleccion=10&tipoFiltro=eleccion");
 
-request.Headers.Add("accept", "*/*");
-request.Headers.Add("accept-language", "es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5");
-request.Headers.Add("priority", "u=1, i");
-request.Headers.Add("referer", "https://resultadoelectoral.onpe.gob.pe/main/resumen");
-request.Headers.Add("sec-ch-ua", "\"Microsoft Edge\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"");
-request.Headers.Add("sec-ch-ua-mobile", "?1");
-request.Headers.Add("sec-ch-ua-platform", "\"Android\"");
-request.Headers.Add("sec-fetch-dest", "empty");
-request.Headers.Add("sec-fetch-mode", "cors");
-request.Headers.Add("sec-fetch-site", "same-origin");
-request.Headers.Add("user-agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36 Edg/147.0.0.0");
+request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0");
+request.Headers.Add("Accept", "*/*");
+request.Headers.Add("Accept-Language", "es-ES,es;q=0.9,en-US;q=0.8,en;q=0.7");
+// request.Headers.Add("Accept-Encoding", "gzip, deflate, br, zstd");
+request.Headers.Add("Referer", "https://resultadoelectoral.onpe.gob.pe/main/resumen");
+request.Headers.Add("DNT", "1");
+request.Headers.Add("Connection", "keep-alive");
+request.Headers.Add("Sec-Fetch-Dest", "empty");
+request.Headers.Add("Sec-Fetch-Mode", "cors");
+request.Headers.Add("Sec-Fetch-Site", "same-origin");
+request.Headers.Add("TE", "trailers");
 
 request.Content = new StringContent("");
 request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -32,10 +34,10 @@ if (resultado?.data != null)
 
     long diferencia = votosPartido10 - votosPartido35;
 
-    //Console.WriteLine($"Votos Juntos por el Perú: {votosPartido10:N0}");
-    //Console.WriteLine($"Votos Renovación Popular: {votosPartido35:N0}");
-    //Console.WriteLine($"-----------------------------");
-    //Console.WriteLine($"Diferencia: {diferencia:N0} votos.");
+    Console.WriteLine($"Votos Juntos por el Perú: {votosPartido10:N0}");
+    Console.WriteLine($"Votos Renovación Popular: {votosPartido35:N0}");
+    Console.WriteLine($"-----------------------------");
+    Console.WriteLine($"Diferencia: {diferencia:N0} votos.");
 
     string template = File.ReadAllText("template.html");
 
