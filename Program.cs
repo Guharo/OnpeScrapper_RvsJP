@@ -39,6 +39,8 @@ if (resultado?.data != null)
 
     string template = File.ReadAllText("template.html");
 
+    DateTime horaPeru = DateTime.UtcNow.AddHours(-5);
+
     string htmlFinal = template
         .Replace("{{DIFERENCIA}}", diferencia.ToString("N0"))
         .Replace("{{VOTOS10}}", votosPartido10.ToString("N0"))
