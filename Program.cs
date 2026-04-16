@@ -39,13 +39,13 @@ if (resultado?.data != null)
 
     string template = File.ReadAllText("template.html");
 
-    DateTime horaPeru = DateTime.UtcNow.AddHours(-5);
+    //DateTime horaPeru = DateTime.UtcNow.AddHours(-5);
 
     string htmlFinal = template
         .Replace("{{DIFERENCIA}}", diferencia.ToString("N0"))
         .Replace("{{VOTOS10}}", votosPartido10.ToString("N0"))
         .Replace("{{VOTOS35}}", votosPartido35.ToString("N0"))
-        .Replace("{{FECHA}}", DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+        .Replace("{{FECHA}}", DateTime.Now.AddHours(-5).ToString("dd/MM/yyyy HH:mm:ss"));
 
     File.WriteAllText("index.html", htmlFinal);
 
