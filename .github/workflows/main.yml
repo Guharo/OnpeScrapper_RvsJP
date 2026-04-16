@@ -1,0 +1,29 @@
+name: Ejecutar Scraper ONPE
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Ejecutar el Scraper
+        run: dotnet run --project OnpeScrapper.csproj
+
+      - name: Subir resultados
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add index.html
+          git commit -m "Auto-actualización de resultados"
+          git push
