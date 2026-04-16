@@ -2,12 +2,21 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados ONPE</title>
     <style>
         body {
             font-family: sans-serif;
             text-align: center;
-            padding-top: 50px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Contenedor que limita el ancho en PCs/TVs pero ocupa el 100% en móviles */
+        .contenedor {
+            width: 100%;
+            max-width: 800px;
         }
 
         h1 {
@@ -40,16 +49,18 @@
     </style>
 </head>
 <body>
-    <h1>Diferencia de votos al 93.064%</h1>
-    <div class="resultado">6,517</div>
+    <div class="contenedor">
+        <h1>Diferencia de votos al 93.064%</h1>
+        <div class="resultado">6,517</div>
 
-    <div class="detalles">
-        <p>Juntos por el Perú: <b>1,880,328</b></p>
-        <p>Renovación Popular: <b>1,873,811</b></p>
-    </div>
+        <div class="detalles">
+            <p>Juntos por el Perú: <b>1,880,328</b></p>
+            <p>Renovación Popular: <b>1,873,811</b></p>
+        </div>
 
-    <div class="actualizado">
-        <p>Última actualización ONPE: 16/04/2026 17:35:05</p>
+        <div class="actualizado">
+            <p>Última actualización ONPE: 16/04/2026 17:35:05</p>
+        </div>
     </div>
 </body>
 </html>
