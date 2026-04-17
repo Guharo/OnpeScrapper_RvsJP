@@ -72,5 +72,33 @@
             </a>
         </div>
     </div>
+
+    <script>
+        function actualizarData() {
+            fetch('index.html?t=' + new Date().getTime())
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    const ids = ['porcentaje', 'diferencia', 'votos10', 'votos35', 'fecha'];
+
+                    ids.forEach(id => {
+                        const nuevoElemento = doc.getElementById(id);
+                        const elementoActual = document.getElementById(id);
+
+                        if (nuevoElemento && elementoActual) {
+                            if (elementoActual.innerHTML !== nuevoElemento.innerHTML) {
+                                elementoActual.innerHTML = nuevoElemento.innerHTML;
+                            }
+                        }
+                    });
+                    console.log('Verificación de actualización completada');
+                })
+                .catch(err => console.error('Error al actualizar:', err));
+        }
+
+        setInterval(actualizarData, 300000);
+    </script>
 </body>
 </html>
