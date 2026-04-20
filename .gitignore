@@ -401,3 +401,5 @@ FodyWeavers.xsd
 deploy.bat
 ninjaDeploy.vbs
 *.log
+bash.exe.stackdump
+sh.exe.stackdump
