@@ -45,7 +45,7 @@ var resultado = JsonSerializer.Deserialize<Root>(responseBody);
 request2.Content = new StringContent("");
 request2.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-HttpResponseMessage response2 = await client.SendAsync(request2);
+HttpResponseMessage response2 = await client2.SendAsync(request2);
 response2.EnsureSuccessStatusCode();
 string responseHeaderDate = await response2.Content.ReadAsStringAsync();
 var resultado2 = JsonSerializer.Deserialize<CabeceraOnpe>(responseHeaderDate);
@@ -61,38 +61,35 @@ if (resultado?.data != null && resultado2?.data != null)
 
     DateTime fechaActualizacion = DateTimeOffset.FromUnixTimeMilliseconds(resultado2.data.fechaActualizacion).DateTime.AddHours(-5);
 
-    //Console.WriteLine($"Votos Juntos por el Perú: {votosPartido10:N0}");
-    //Console.WriteLine($"Votos Renovación Popular: {votosPartido35:N0}");
-    //Console.WriteLine($"-----------------------------");
-    //Console.WriteLine($"Diferencia: {diferencia:N0} votos.");
+    string rutaRaiz = Directory.GetCurrentDirectory();
+    string templatePath = Path.Combine(rutaRaiz, "template.html");
+    string outputPath = Path.Combine(rutaRaiz, "index.html");
 
-    string template = File.ReadAllText("template.html");
+    if (File.Exists(templatePath))
+    {
+        string template = File.ReadAllText(templatePath);
 
-    string htmlFinal = template
-        .Replace("{{PORCENTAJE}}", resultado2.data.actasContabilizadas.ToString())
-        .Replace("{{DIFERENCIA}}", diferencia.ToString("N0"))
-        .Replace("{{VOTOS10}}", votosPartido10.ToString("N0"))
-        .Replace("{{VOTOS35}}", votosPartido35.ToString("N0"))
-        .Replace("{{FECHA}}", fechaActualizacion.ToString("dd/MM/yyyy HH:mm:ss"));
+        string htmlFinal = template
+            .Replace("{{PORCENTAJE}}", resultado2.data.actasContabilizadas.ToString())
+            .Replace("{{DIFERENCIA}}", diferencia.ToString("N0"))
+            .Replace("{{VOTOS10}}", votosPartido10.ToString("N0"))
+            .Replace("{{VOTOS35}}", votosPartido35.ToString("N0"))
+            .Replace("{{FECHA}}", fechaActualizacion.ToString("dd/MM/yyyy HH:mm:ss"));
 
-    File.WriteAllText("index.html", htmlFinal);
-
-    //Console.WriteLine("Archivo HTML actualizado con éxito.");
-}
-else
-{
-    //Console.WriteLine("No se pudo obtener la data.");
+        File.WriteAllText(outputPath, htmlFinal);
+        Console.WriteLine("¡HTML restaurado y actualizado con éxito!");
+    }
 }
 
 public class CabeceraOnpe
 {
-    public DataContainer data { get; set; } // Debe apuntar al objeto contenedor
+    public DataContainer data { get; set; }
 }
 
 public class DataContainer
 {
     public decimal actasContabilizadas { get; set; }
-    public long fechaActualizacion { get; set; } // Aquí está realmente el dato
+    public long fechaActualizacion { get; set; }
 }
 public class Agrupacion
 {
